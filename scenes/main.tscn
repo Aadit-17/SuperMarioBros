@@ -1,0 +1,47 @@
+[gd_scene load_steps=11 format=3 uid="uid://cbjqy02dwegl3"]
+
+[ext_resource type="Texture2D" uid="uid://bh2i2pbd72n30" path="res://Assets/Sprites/GroundBlock.png" id="1_44ivx"]
+[ext_resource type="Texture2D" uid="uid://8as4lix1a8pr" path="res://Assets/Sprites/HardBlock.png" id="2_e1l7d"]
+[ext_resource type="Texture2D" uid="uid://dbhkvad8kmca" path="res://Assets/Sprites/UndergroundBlock.png" id="3_6qpv5"]
+[ext_resource type="Texture2D" uid="uid://dtkrgfs1x5qrr" path="res://Assets/Sprites/UndergroundBrick.png" id="4_wjrme"]
+[ext_resource type="PackedScene" uid="uid://3yfpgash6rnb" path="res://scenes/mario.tscn" id="5_o6f40"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_62ejn"]
+texture = ExtResource("1_44ivx")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_24itm"]
+texture = ExtResource("2_e1l7d")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3xwr1"]
+texture = ExtResource("3_6qpv5")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_520go"]
+texture = ExtResource("4_wjrme")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_srrlk"]
+physics_layer_0/collision_layer = 2
+sources/0 = SubResource("TileSetAtlasSource_62ejn")
+sources/1 = SubResource("TileSetAtlasSource_24itm")
+sources/2 = SubResource("TileSetAtlasSource_3xwr1")
+sources/3 = SubResource("TileSetAtlasSource_520go")
+
+[node name="main" type="Node"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_srrlk")
+format = 2
+layer_0/tile_data = PackedInt32Array(327668, 0, 0, 393204, 0, 0, 458740, 0, 0, 327669, 0, 0, 393205, 0, 0, 458741, 0, 0, 327670, 0, 0, 393206, 0, 0, 458742, 0, 0, 327671, 0, 0, 393207, 0, 0, 458743, 0, 0, 327672, 0, 0, 393208, 0, 0, 458744, 0, 0, 327673, 0, 0, 393209, 0, 0, 458745, 0, 0, 327674, 0, 0, 393210, 0, 0, 458746, 0, 0, 327675, 0, 0, 393211, 0, 0, 458747, 0, 0, 327676, 0, 0, 393212, 0, 0, 458748, 0, 0, 327677, 0, 0, 393213, 0, 0, 458749, 0, 0, 327678, 0, 0, 393214, 0, 0, 458750, 0, 0, 327679, 0, 0, 393215, 0, 0, 458751, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 262145, 0, 0, 327681, 0, 0, 393217, 0, 0, 262146, 0, 0, 327682, 0, 0, 393218, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 262148, 0, 0, 327684, 0, 0, 393220, 0, 0, 262149, 0, 0, 327685, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 327693, 0, 0, 262157, 0, 0, 262156, 0, 0, 262155, 0, 0, 262154, 0, 0, 262153, 0, 0, 262152, 0, 0, 262151, 0, 0, 262150, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327692, 0, 0, 327691, 0, 0, 327690, 0, 0, 327689, 0, 0, 393229, 0, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.75, 2.75)
+
+[node name="Mario" parent="." instance=ExtResource("5_o6f40")]
+position = Vector2(-184.181, 50.2652)
