@@ -21,6 +21,12 @@ enum PlayerMode {
 @export var jump_velocity = -350
 @export_group("")
 
+@export_group("Stomping enemies")
+@export var min_stomp_degree = 35
+@export var max_stomp_degree = 145
+@export var stomp_y_velocity = -150
+@export_group("")
+
 var player_mode = PlayerMode.SMALL
 
 func _physics_process(delta):
@@ -48,25 +54,23 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
-#const SPEED = 300.0
-#const JUMP_VELOCITY = -400.0
-#
-#
-#func _physics_process(delta: float) -> void:
-	## Add the gravity.
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
-#
-	## Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-#
-	## Get the input direction and handle the movement/deceleration.
-	## As good practice, you should replace UI actions with custom gameplay actions.
-	#var direction := Input.get_axis("ui_left", "ui_right")
-	#if direction:
-		#velocity.x = direction * SPEED
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-#
-	#move_and_slide()
+func _on_area_2d_area_entered(area):
+	if area is Enemy:
+		handle_enemy_collision(area)
+		
+func handle_enemy_collision(enemy: Enemy):
+	if enemy == null: #&& is_dead:
+		return
+		
+	var angle_of_collision = rad_to_deg(position.angle_to_point(enemy.position))
+	
+	if angle_of_collision > min_stomp_degree && max_stomp_degree > angle_of_collision:
+		enemy.die()
+		on_enemy_stomped()
+		#spawn_points_label(enemy)
+		#level_manager.on_points_scored(100)
+	else:
+		print("die()")
+		
+func on_enemy_stomped():
+	velocity.y = stomp_y_velocity

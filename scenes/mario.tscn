@@ -272,18 +272,21 @@ animations = [{
 }]
 
 [node name="Mario" type="CharacterBody2D"]
-collision_mask = 2
+collision_mask = 6
 script = ExtResource("1_yasbe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rr6x5")
-animation = &"big_to_shoot"
+animation = &"small_jump"
 script = ExtResource("25_61cdl")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 4
 
 [node name="AreaCollisionShape" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("3_luuu2")
 
 [node name="BodyCollisionShape" type="CollisionShape2D" parent="."]
 shape = ExtResource("3_luuu2")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

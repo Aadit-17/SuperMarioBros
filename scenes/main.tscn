@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cbjqy02dwegl3"]
+[gd_scene load_steps=13 format=3 uid="uid://cbjqy02dwegl3"]
 
 [ext_resource type="Texture2D" uid="uid://bh2i2pbd72n30" path="res://Assets/Sprites/GroundBlock.png" id="1_44ivx"]
 [ext_resource type="Texture2D" uid="uid://8as4lix1a8pr" path="res://Assets/Sprites/HardBlock.png" id="2_e1l7d"]
 [ext_resource type="Texture2D" uid="uid://dbhkvad8kmca" path="res://Assets/Sprites/UndergroundBlock.png" id="3_6qpv5"]
 [ext_resource type="Texture2D" uid="uid://dtkrgfs1x5qrr" path="res://Assets/Sprites/UndergroundBrick.png" id="4_wjrme"]
 [ext_resource type="PackedScene" uid="uid://3yfpgash6rnb" path="res://scenes/mario.tscn" id="5_o6f40"]
+[ext_resource type="PackedScene" uid="uid://cv5605xxg0y0j" path="res://scenes/goomba.tscn" id="6_diwkh"]
+[ext_resource type="PackedScene" uid="uid://camx5jnn5h5nm" path="res://scenes/koopa.tscn" id="7_yvp13"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_62ejn"]
 texture = ExtResource("1_44ivx")
@@ -45,3 +47,11 @@ zoom = Vector2(2.75, 2.75)
 
 [node name="Mario" parent="." instance=ExtResource("5_o6f40")]
 position = Vector2(-184.181, 50.2652)
+
+[node name="enemies" type="Node" parent="."]
+
+[node name="koopa" parent="enemies" instance=ExtResource("7_yvp13")]
+position = Vector2(-63.03, 43.1951)
+
+[node name="Goomba" parent="enemies" instance=ExtResource("6_diwkh")]
+position = Vector2(-103.571, 43.1951)
