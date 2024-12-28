@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://3yfpgash6rnb"]
 
-[ext_resource type="Script" path="res://Scripts/mario.gd" id="1_yasbe"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_yasbe"]
 [ext_resource type="Texture2D" uid="uid://ct8uqpacoxaq1" path="res://Assets/Sprites/Mario_Big_Idle.png" id="2_2fnoj"]
 [ext_resource type="Texture2D" uid="uid://d3jwm15et3t22" path="res://Assets/Sprites/Mario_Small_Idle.png" id="2_guahc"]
 [ext_resource type="Shape2D" uid="uid://dfdf3o6jrkhue" path="res://Resources/CollisionShapes/small_mario_collision_shape.tres" id="3_luuu2"]
@@ -271,17 +271,17 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Mario" type="CharacterBody2D"]
-collision_mask = 6
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 22
 script = ExtResource("1_yasbe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rr6x5")
-animation = &"small_jump"
+animation = &"small_run"
 script = ExtResource("25_61cdl")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_mask = 4
+collision_mask = 20
 
 [node name="AreaCollisionShape" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("3_luuu2")
@@ -290,3 +290,4 @@ shape = ExtResource("3_luuu2")
 shape = ExtResource("3_luuu2")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

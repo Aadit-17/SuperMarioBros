@@ -9,8 +9,10 @@ const KOOPA_FULL_COLLISION_SHAPE = preload("res://Resources/CollisionShapes/koop
 const KOOPA_SHELL_COLLISION_SHAPE = preload("res://Resources/CollisionShapes/koopa_shell_collision_shape.tres")
 @onready var collision_shape_2d = $CollisionShape2D
 
+@export var slide_speed = 200
+
 func _ready():
-	collision_shape_2d.shape = KOOPA_FULL_COLLISION_SHAPE
+	collision_shape_2d.shape = KOOPA_FULL_COLLISION_SHAPE 
 
 func die():
 	if !in_a_shell:
@@ -26,4 +28,4 @@ func on_stomp(player_position: Vector2):
 	set_collision_layer_value(4, true)
 	
 	var movement_direction = 1 if player_position.x <= global_position.x else - 1
-	#horizontal_speed = -movement_direction * slide_speed
+	horizontal_speed = -movement_direction * slide_speed

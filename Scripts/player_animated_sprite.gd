@@ -20,6 +20,8 @@ func trigger_animation(velocity: Vector2, direction: int, player_mode: Player.Pl
 		elif scale.x == -1 && sign(velocity.x) == 1:
 			scale.x = -1
 			
-	#Handle Run and Idle Animations
-	if velocity.x != 0:
-		play("%s_run" % animation_prefix)
+		#Handle Run and Idle Animations
+		if velocity.x != 0:
+			play("%s_run" % animation_prefix)
+		else:
+			play("%s_idle" % animation_prefix)
