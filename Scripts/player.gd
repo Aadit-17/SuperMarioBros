@@ -13,7 +13,7 @@ enum PlayerMode {
 }
 
 #On ready
-const POINTS_LABEL_SCENE = preload("res://Scenes/points_label.tscn")
+const POINTS_LABEL_SCENE = preload("res://scenes/points_label.tscn")
 
 #References
 @onready var animated_sprite_2d = $AnimatedSprite2D

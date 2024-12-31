@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cbjqy02dwegl3"]
+[gd_scene load_steps=16 format=3 uid="uid://cbjqy02dwegl3"]
 
 [ext_resource type="Texture2D" uid="uid://bh2i2pbd72n30" path="res://Assets/Sprites/GroundBlock.png" id="1_44ivx"]
 [ext_resource type="Texture2D" uid="uid://8as4lix1a8pr" path="res://Assets/Sprites/HardBlock.png" id="2_e1l7d"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bcpkmefxjh817" path="res://scenes/brick.tscn" id="7_7h6wy"]
 [ext_resource type="PackedScene" uid="uid://dc6xy0txlqlli" path="res://scenes/mystery_box.tscn" id="7_dl0ou"]
 [ext_resource type="PackedScene" uid="uid://camx5jnn5h5nm" path="res://scenes/koopa.tscn" id="7_yvp13"]
+[ext_resource type="Script" path="res://Scripts/level_manager.gd" id="10_ntg3l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_62ejn"]
 texture = ExtResource("1_44ivx")
@@ -68,3 +69,6 @@ position = Vector2(156, 44)
 [node name="Goomba" parent="." instance=ExtResource("6_diwkh")]
 position = Vector2(-137.041, -6.77396)
 horizontal_speed = 0
+
+[node name="LevelManager" type="Node" parent="." groups=["level_manager"]]
+script = ExtResource("10_ntg3l")

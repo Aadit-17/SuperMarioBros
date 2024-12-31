@@ -9,7 +9,7 @@ enum BonusType {
 }
 
 #Bonus References
-
+const COIN_SCENE = preload("res://Scenes/coin.tscn")
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @export var bonus_type: BonusType = BonusType.COIN
@@ -48,12 +48,12 @@ func make_empty():
 	#shroom.global_position = global_position
 	#get_tree().root.add_child(shroom)
 	#
-#func spawn_coin():
-	#var coin = COIN_SCENE.instantiate()
-	#coin.global_position = global_position + Vector2(0, -16)
-	#get_tree().root.add_child(coin)
-	#get_tree().get_first_node_in_group("level_manager").on_coin_collected()
-	#
+func spawn_coin():
+	var coin = COIN_SCENE.instantiate()
+	coin.global_position = global_position + Vector2(0, -16)
+	get_tree().root.add_child(coin)
+	get_tree().get_first_node_in_group("level_manager").on_coin_collected()
+	
 #func spawn_flower():
 	#var flower = SHOOTING_FLOWER_SCENE.instantiate()
 	#flower.global_position = global_position
