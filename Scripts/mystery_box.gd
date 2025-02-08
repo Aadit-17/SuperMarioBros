@@ -9,7 +9,8 @@ enum BonusType {
 }
 
 #Bonus References
-const COIN_SCENE = preload("res://Scenes/coin.tscn")
+const COIN_SCENE = preload("res://scenes/coin.tscn")
+const SHROOM_SCENE = preload("res://scenes/shroom.tscn")
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @export var bonus_type: BonusType = BonusType.COIN
@@ -31,11 +32,11 @@ func bump(player_mode: Player.PlayerMode):
 	super.bump(player_mode)
 	make_empty()
 	
-	#match  bonus_type:
-		#BonusType.COIN:
-			#spawn_coin()
-		#BonusType.SHROOM:
-			#spawn_shroom()
+	match  bonus_type:
+		BonusType.COIN:
+			spawn_coin()
+		BonusType.SHROOM:
+			spawn_shroom()
 		#BonusType.FLOWER:
 			#spawn_flower()
 
@@ -43,11 +44,11 @@ func make_empty():
 	is_empty = true
 	animated_sprite_2d.play("empty")
 
-#func spawn_shroom():
-	#var shroom = SHROOM_SCENE.instantiate()
-	#shroom.global_position = global_position
-	#get_tree().root.add_child(shroom)
-	#
+func spawn_shroom():
+	var shroom = SHROOM_SCENE.instantiate()
+	shroom.global_position = global_position
+	get_tree().root.add_child(shroom)
+
 func spawn_coin():
 	var coin = COIN_SCENE.instantiate()
 	coin.global_position = global_position + Vector2(0, -16)

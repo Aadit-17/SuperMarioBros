@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://1cqsmxtajm6u"]
+
+[ext_resource type="Texture2D" uid="uid://80dij0rowpdx" path="res://Assets/Sprites/MagicMushroom.png" id="1_12tdg"]
+[ext_resource type="Script" path="res://Scripts/shroom.gd" id="1_g2mv3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jl55l"]
+size = Vector2(13, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njhuc"]
+
+[node name="Shroom" type="Area2D"]
+collision_layer = 32
+script = ExtResource("1_g2mv3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_12tdg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_jl55l")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_njhuc")
+target_position = Vector2(0, 0)
+collision_mask = 18
+collide_with_areas = true

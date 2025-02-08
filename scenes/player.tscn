@@ -277,11 +277,11 @@ script = ExtResource("1_yasbe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rr6x5")
-animation = &"small_run"
+animation = &"big_to_shoot"
 script = ExtResource("25_61cdl")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_mask = 20
+collision_mask = 60
 
 [node name="AreaCollisionShape" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("3_luuu2")
@@ -289,5 +289,7 @@ shape = ExtResource("3_luuu2")
 [node name="BodyCollisionShape" type="CollisionShape2D" parent="."]
 shape = ExtResource("3_luuu2")
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

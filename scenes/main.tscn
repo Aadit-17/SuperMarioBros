@@ -56,6 +56,7 @@ position = Vector2(-133.741, 11.6109)
 
 [node name="MysteryBox" parent="." instance=ExtResource("7_dl0ou")]
 position = Vector2(6.73807, 13.0251)
+bonus_type = 1
 
 [node name="enemies" type="Node" parent="."]
 

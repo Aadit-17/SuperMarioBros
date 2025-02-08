@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bjg3iygbc6nhd"]
+
+[node name="ShootingFlower" type="Area2D"]
