@@ -11,6 +11,7 @@ enum BonusType {
 #Bonus References
 const COIN_SCENE = preload("res://scenes/coin.tscn")
 const SHROOM_SCENE = preload("res://scenes/shroom.tscn")
+const SHOOTING_FLOWER_SCENE = preload("res://scenes/shooting_flower.tscn")
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @export var bonus_type: BonusType = BonusType.COIN
@@ -37,8 +38,8 @@ func bump(player_mode: Player.PlayerMode):
 			spawn_coin()
 		BonusType.SHROOM:
 			spawn_shroom()
-		#BonusType.FLOWER:
-			#spawn_flower()
+		BonusType.FLOWER:
+			spawn_flower()
 
 func make_empty():
 	is_empty = true
@@ -55,7 +56,7 @@ func spawn_coin():
 	get_tree().root.add_child(coin)
 	get_tree().get_first_node_in_group("level_manager").on_coin_collected()
 	
-#func spawn_flower():
-	#var flower = SHOOTING_FLOWER_SCENE.instantiate()
-	#flower.global_position = global_position
-	#get_tree().root.add_child(flower)
+func spawn_flower():
+	var flower = SHOOTING_FLOWER_SCENE.instantiate()
+	flower.global_position = global_position
+	get_tree().root.add_child(flower)

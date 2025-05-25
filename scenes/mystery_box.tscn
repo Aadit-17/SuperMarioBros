@@ -39,6 +39,7 @@ z_index = 2
 collision_layer = 16
 collision_mask = 13
 script = ExtResource("1_kq721")
+bonus_type = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_182lb")

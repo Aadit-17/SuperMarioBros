@@ -101,7 +101,7 @@ animations = [{
 "texture": ExtResource("9_n1oj4")
 }],
 "loop": false,
-"name": &"big_to_shoot",
+"name": &"big_to_shooting",
 "speed": 5.0
 }, {
 "frames": [{
@@ -118,20 +118,6 @@ animations = [{
 }],
 "loop": false,
 "name": &"shoot",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("12_akmso")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_8nk77")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_xqr3d")
-}],
-"loop": true,
-"name": &"shoot_run",
 "speed": 10.0
 }, {
 "frames": [{
@@ -157,6 +143,20 @@ animations = [{
 "loop": true,
 "name": &"shooting_pole",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_akmso")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_8nk77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_xqr3d")
+}],
+"loop": true,
+"name": &"shooting_run",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -267,7 +267,7 @@ animations = [{
 "texture": ExtResource("9_n1oj4")
 }],
 "loop": false,
-"name": &"small_to_shoot",
+"name": &"small_to_shooting",
 "speed": 5.0
 }]
 
@@ -277,7 +277,7 @@ script = ExtResource("1_yasbe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rr6x5")
-animation = &"big_to_shoot"
+animation = &"shooting_run"
 script = ExtResource("25_61cdl")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -288,6 +288,9 @@ shape = ExtResource("3_luuu2")
 
 [node name="BodyCollisionShape" type="CollisionShape2D" parent="."]
 shape = ExtResource("3_luuu2")
+
+[node name="ShootingPoint" type="Marker2D" parent="."]
+position = Vector2(7, -2)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_frame_changed"]
