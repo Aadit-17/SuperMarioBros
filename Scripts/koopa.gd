@@ -11,9 +11,10 @@ const KOOPA_SHELL_COLLISION_SHAPE = preload("res://Resources/CollisionShapes/koo
 
 @export var slide_speed = 200
 
-func _ready():
-	collision_shape_2d.shape = KOOPA_FULL_COLLISION_SHAPE 
 
+func _ready():
+	collision_shape_2d.shape = KOOPA_FULL_COLLISION_SHAPE
+	
 func die():
 	if !in_a_shell:
 		super.die()
@@ -21,7 +22,7 @@ func die():
 	collision_shape_2d.set_deferred("shape", KOOPA_SHELL_COLLISION_SHAPE)
 	collision_shape_2d.set_deferred("position", KOOPA_SHELL_COLLISION_SHAPE_POSITION)
 	in_a_shell = true
-
+		
 func on_stomp(player_position: Vector2):
 	set_collision_mask_value(1, false)
 	set_collision_layer_value(3, false)

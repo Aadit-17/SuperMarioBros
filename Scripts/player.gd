@@ -12,6 +12,8 @@ enum PlayerMode {
 	SHOOTING
 }
 
+const PIPE_ENTER_THRESHOLD = 10
+
 #On ready
 const POINTS_LABEL_SCENE = preload("res://scenes/points_label.tscn")
 const SMALL_MARIO_COLLISION_SHAPE = preload("res://Resources/CollisionShapes/small_mario_collision_shape.tres")
@@ -37,13 +39,29 @@ const FIREBALL_SCENE = preload("res://scenes/fireball.tscn")
 @export var stomp_y_velocity = -150
 @export_group("")
 
+@export_group("Camera sync")
+@export var camera_sync: Camera2D
+@export var should_camera_sync: bool = true
+@export_group("")
+
 var player_mode = PlayerMode.SMALL
 
 # Player state flags
 var is_dead = false
 var is_on_path = false
 
+func _ready():
+	if SceneData.return_point != null && SceneData.return_point != Vector2.ZERO:
+		global_position = SceneData.return_point
+
+
 func _physics_process(delta):
+	var camera_left_bound = camera_sync.global_position.x - camera_sync.get_viewport_rect().size.x / 2 / camera_sync.zoom.x
+	
+	if global_position.x < camera_left_bound + 8 && sign(velocity.x) == -1:
+		velocity = Vector2.ZERO
+		return
+	
 	#Apply Gravity
 	if not is_on_floor():
 		velocity.y += gravity*delta
@@ -73,6 +91,10 @@ func _physics_process(delta):
 		handle_movement_collision(collision)
 
 	move_and_slide()
+
+func _process(delta):
+	if global_position.x > camera_sync.global_position.x && should_camera_sync:
+		camera_sync.global_position.x = global_position.x
 
 func _on_area_2d_area_entered(area):
 	if area is Enemy:
@@ -154,11 +176,10 @@ func handle_movement_collision(collision: KinematicCollision2D):
 		if roundf(collision_angle) == 180:
 			(collision.get_collider() as Block).bump(player_mode)
 	
-	#if collision.get_collider() is Pipe:
-	#	var collision_angle = rad_to_deg(collision.get_angle())
-	#	if roundf(collision_angle) == 0 && Input.is_action_just_pressed("down") && absf(collision.get_collider().position.x - position.x < PIPE_ENTER_THRESHOLD && collision.get_collider().is_traversable):
-	#		print("GO DOWN")
-	#		handle_pipe_collision()
+	if collision.get_collider() is Pipe:
+		var collision_angle = rad_to_deg(collision.get_angle())
+		if roundf(collision_angle) == 0 && Input.is_action_just_pressed("down") && absf(collision.get_collider().position.x - position.x < PIPE_ENTER_THRESHOLD && collision.get_collider().is_traversable):
+			handle_pipe_collision()
 
 func big_to_small():
 	set_collision_layer_value(1, false)
@@ -176,3 +197,26 @@ func shoot():
 	fireball.direction = sign(animated_sprite_2d.scale.x)
 	fireball.global_position = shooting_point.global_position
 	get_tree().root.add_child(fireball)
+
+
+func handle_pipe_collision():
+	set_physics_process(false)
+	z_index = -3
+	var pipe_tween = get_tree().create_tween()
+	pipe_tween.tween_property(self, "position", position + Vector2(0, 32), 1)
+	pipe_tween.tween_callback(switch_to_underground)
+
+func switch_to_underground():
+	get_tree().change_scene_to_file("res://scenes/underground.tscn")
+	SceneData.player_mode = player_mode
+
+
+func handle_pipe_connector_entrance_collision():
+	set_physics_process(false)
+	var pipe_tween = get_tree().create_tween()
+	pipe_tween.tween_property(self, "position", position + Vector2(32, 0), 1)
+	pipe_tween.tween_callback(switch_to_main)
+	
+	
+func switch_to_main():
+	get_tree().change_scene_to_file("res://scenes/main.tscn")
